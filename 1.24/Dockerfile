@@ -1,5 +1,5 @@
 FROM php:5.6-apache
-MAINTAINER Synctree App Force <appforce+docker@synctree.com>
+MAINTAINER DACRepair (Based on the SyncTree repo)
 
 ENV MEDIAWIKI_VERSION 1.24
 ENV MEDIAWIKI_FULL_VERSION 1.24.2
@@ -15,7 +15,7 @@ RUN set -x; \
     && apt-get purge -y --auto-remove g++ libicu-dev \
     && rm -rf /var/lib/apt/lists/*
 
-RUN docker-php-ext-install mysqli opcache
+RUN docker-php-ext-install mysqli opcache ldap
 
 RUN set -x; \
     apt-get update \
