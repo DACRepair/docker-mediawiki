@@ -9,7 +9,7 @@ RUN apt-get update \
         imagemagick
 
 RUN pecl install intl \
-    echo extension=intl.so >> /usr/local/etc/php/conf.d/ext-intl.ini \
+    && echo extension=intl.so >> /usr/local/etc/php/conf.d/ext-intl.ini \
 
 RUN docker-php-ext-configure ldap --with-libdir=lib/x86_64-linux-gnu/ \
     && docker-php-ext-install mysqli opcache ldap xml mbstring
