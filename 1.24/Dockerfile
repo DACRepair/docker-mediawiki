@@ -4,18 +4,15 @@ MAINTAINER DACRepair
 
 RUN apt-get update \
     && apt-get -y --no-install-recommends install \
-        git g++ libicu52 libicu-dev \
+        git g++ libicu52 libicu-dev zlib1g-dev \
         libxml2-dev libldap2-dev \
         imagemagick
 
-RUN set -x; \
-    pecl install intl \
-    && echo extension=intl.so >> /usr/local/etc/php/conf.d/ext-intl.ini \
-
 RUN docker-php-ext-configure ldap --with-libdir=lib/x86_64-linux-gnu/ \
-    && docker-php-ext-install mysqli opcache ldap xml mbstring
+    && docker-php-ext-configure intl
+    && docker-php-ext-install mysqli opcache ldap xml mbstring intl
 
-RUN apt-get purge -y --auto-remove g++ libicu-dev \
+RUN apt-get purge -y --auto-remove g++ libicu-dev zlib1g-dev libxml2-dev libldap2-dev\
     && rm -rf /var/lib/apt/lists/*
 
 RUN a2enmod rewrite
