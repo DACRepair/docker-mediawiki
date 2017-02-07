@@ -8,7 +8,8 @@ RUN apt-get update \
         libxml2-dev libldap2-dev \
         imagemagick
 
-RUN pecl install intl \
+RUN set -x; \
+    pecl install intl \
     && echo extension=intl.so >> /usr/local/etc/php/conf.d/ext-intl.ini \
 
 RUN docker-php-ext-configure ldap --with-libdir=lib/x86_64-linux-gnu/ \
