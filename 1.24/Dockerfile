@@ -8,9 +8,9 @@ RUN apt-get update \
         libxml2-dev libldap2-dev \
         imagemagick
 
-RUN docker-php-ext-configure ldap --with-libdir=lib/x86_64-linux-gnu/ \
-    && docker-php-ext-configure intl
-    && docker-php-ext-install mysqli opcache ldap xml mbstring intl
+RUN docker-php-ext-configure ldap --with-libdir=lib/x86_64-linux-gnu/
+RUN docker-php-ext-configure intl
+RUN docker-php-ext-install mysqli opcache ldap xml mbstring intl
 
 RUN apt-get purge -y --auto-remove g++ libicu-dev zlib1g-dev libxml2-dev libldap2-dev \
     && rm -rf /var/lib/apt/lists/*
